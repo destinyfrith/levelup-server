@@ -1,0 +1,24 @@
+[
+    {
+        "model": "levelupapi.event",
+        "pk": 1,
+        "fields": {
+            "description": "Relaxing game night with patterns",
+            "date": "2022-6-30",
+            "time": "4:45",
+            "game_id": 1,
+            "organizer_id": 1
+        }
+    },
+    {
+        "model": "levelupapi.event",
+        "pk": 2,
+        "fields": {
+            "description": "Fun with friends and trains",
+            "date": "2022-8-01",
+            "time": "3:00",
+            "game_id": 2,
+            "organizer_id": 1
+        }
+    }   
+]
