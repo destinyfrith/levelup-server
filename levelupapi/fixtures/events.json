@@ -6,8 +6,8 @@
             "description": "Relaxing game night with patterns",
             "date": "2022-6-30",
             "time": "4:45",
-            "game_id": 1,
-            "organizer_id": 1
+            "game": 1,
+            "organizer": 1
         }
     },
     {
@@ -17,8 +17,8 @@
             "description": "Fun with friends and trains",
             "date": "2022-8-01",
             "time": "3:00",
-            "game_id": 2,
-            "organizer_id": 1
+            "game": 2,
+            "organizer": 1
         }
     }   
 ]

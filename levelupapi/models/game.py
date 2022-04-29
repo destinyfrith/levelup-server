@@ -8,4 +8,4 @@ class Game(models.Model):
     number_of_players = models.IntegerField()
     skill_level = models.IntegerField()
 
-    # snakeorcamel
+
