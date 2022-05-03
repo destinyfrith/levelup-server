@@ -43,5 +43,6 @@ class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         fields = ('id', 'description', 'date', 'time', 'game', 'organizer')
+        depth = 2
         # The Meta class hold the configuration for the serializer.
         # We’re telling the serializer to use the Event model and to include all fields

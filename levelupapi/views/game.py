@@ -39,6 +39,7 @@ class GameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Game
         fields = ('id', 'title', 'maker', 'number_of_players',
-                  'skill_level', 'game_type', 'gamer')
+                  'skill_level', 'game_type', 'gamer',)
+        depth = 1
         # The Meta class hold the configuration for the serializer.
         # We’re telling the serializer to use the Game model and to include all fields
