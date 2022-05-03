@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import serializers, status
 from levelupapi.models import Game
 
+
 class GameView(ViewSet):
     """Level up games view"""
 
@@ -13,9 +14,12 @@ class GameView(ViewSet):
             Response -- JSON serialized game
         """
 
-        game = Game.objects.get(pk=pk)
-        serializer = GameSerializer(game)
-        return Response(serializer.data)
+        try:
+            game = Game.objects.get(pk=pk)
+            serializer = GameSerializer(game)
+            return Response(serializer.data)
+        except Game.DoesNotExist as ex:
+            return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
 
     def list(self, request):
         """Handle GET requests to get all games
@@ -34,6 +38,7 @@ class GameSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Game
-        fields = ('id', 'title','maker', 'number_of_players', 'skill_level', 'game_type', 'gamer')
+        fields = ('id', 'title', 'maker', 'number_of_players',
+                  'skill_level', 'game_type', 'gamer')
         # The Meta class hold the configuration for the serializer.
         # We’re telling the serializer to use the Game model and to include all fields
