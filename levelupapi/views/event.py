@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from levelupapi.models import Event
+from levelupapi.models import Event, Game, Gamer
 
 
 class EventView(ViewSet):
@@ -36,6 +36,18 @@ class EventView(ViewSet):
         serializer = EventSerializer(events, many=True)
         return Response(serializer.data)
 
+    def create(self, request):
+        """Handle POST operations
+        Returns
+            Response -- JSON serialized game instance
+        """
+        organizer = Gamer.objects.get(user=request.auth.user)
+        game = Game.objects.get(pk=request.data["game"])
+        serializer = CreateEventSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(organizer=organizer, game=game)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 
 class EventSerializer(serializers.ModelSerializer):
     """JSON serializer for events
@@ -46,3 +58,11 @@ class EventSerializer(serializers.ModelSerializer):
         depth = 2
         # The Meta class hold the configuration for the serializer.
         # We’re telling the serializer to use the Event model and to include all fields
+
+
+class CreateEventSerializer(serializers.ModelSerializer):
+    """JSON serializer for game types
+    """
+    class Meta:
+        model = Event
+        fields = ('id', 'description', 'date', 'time', 'game', 'organizer')
